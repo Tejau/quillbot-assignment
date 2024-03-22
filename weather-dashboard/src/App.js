@@ -19,7 +19,7 @@ const App = () => {
 
   const fetchWeatherByZip = async (zipCode, countryCode) => {
     try {
-      const response = await fetch('http://192.168.1.14:8000/weather', {
+      const response = await fetch('http://localhost:8000/weather', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
