@@ -1,0 +1,20 @@
+version: '3.8'
+
+services:
+  flask-app:
+    build: ./server
+    container_name: server
+    ports:
+      - "8000:8000"
+    environment:
+      - FLASK_ENV=development
+      - FLASK_APP=main.py
+    command: flask run --host=0.0.0.0 --port=8000
+
+  react-app:
+    build: ./weather-dashboard
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=development
+      - CHOKIDAR_USEPOLLING=true # Helps with hot reloading in Docker  

@@ -1,0 +1,36 @@
+version: '3.8'
+
+services:
+  server:
+    build: ./server
+    container_name: server
+    ports:
+      - "8000:8000"
+    environment:
+      - FLASK_ENV=development
+      - FLASK_APP=main.py
+    command: flask run --host=0.0.0.0 --port=8000
+    networks:
+      - api-layer
+
+  client:
+    build: ./weather-dashboard
+    container_name: client
+    environment:
+      - NODE_ENV=development
+      - CHOKIDAR_USEPOLLING=true # Helps with hot reloading in Docker  
+    networks:
+      - api-layer
+
+  nginx:
+    image: nginx:latest
+    container_name: nginx
+    volumes:
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf
+    ports:
+      - "80:80"
+    depends_on:
+      - server
+      - client
+    networks:
+      - api-layer    
