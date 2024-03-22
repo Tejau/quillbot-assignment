@@ -33,4 +33,6 @@ services:
       - server
       - client
     networks:
-      - api-layer    
+      - api-layer 
+networks:
+  api-layer: {}       
