@@ -4,8 +4,6 @@ services:
   server:
     build: ./server
     container_name: server
-    ports:
-      - "8000:8000"
     environment:
       - FLASK_ENV=development
       - FLASK_APP=main.py
